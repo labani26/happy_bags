@@ -1,6 +1,8 @@
 const bcrypt = require('bcrypt');
 const Customer = require('../../models/Customer/UserSchema');
 const jwt = require('jsonwebtoken');
+// const session = require("express-session");
+const { json } = require('express');
 
 const SECRET_KEY = "USERS_SECRET_KEY"; // Define a secret key
 
@@ -65,14 +67,23 @@ const signin = async (req, res) => {
             return res.status(401).json({ error: "Invalid credentials" });
         }
 
-        // Generate a token
-        const token = jwt.sign(
-            { email: existingUser.email, phone: existingUser.phone, id: existingUser._id },
-            SECRET_KEY
-        );
+          // Create a session for the user
+            req.session._id = existingUser._id;
+            console.log(req.session._id);
+            // return res.status(200).json({ message: "Welcome" }); 
 
-        // Send response with user data and token
-        return res.status(200).json({ existingUser, token });
+
+           // Send a success response
+            return res.status(200).json({ message: "Login successful", user: req.session._id});
+
+        // Generate a token
+        // const token = jwt.sign(
+        //     { email: existingUser.email, phone: existingUser.phone, id: existingUser._id },
+        //     SECRET_KEY
+        // );
+
+        // // Send response with user data and token
+        // return res.status(200).json({ existingUser, token })  
 
     } catch (error) {
         console.error("Signin Error: ", error);
