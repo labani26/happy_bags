@@ -7,7 +7,7 @@ const search = async (req, res) => {
 
     try {
 
-        const searchProduct = await Product.find({ $or: [{ name }, { category }, { price }, {country_of_origin}] });
+        const searchProduct = await Product.find({ $or: [{ name }, { category }, { price }, {country_of_origin}, {material},] });
 
         return res.status(200).json({ message: "Here is your search", searchProduct});
 
