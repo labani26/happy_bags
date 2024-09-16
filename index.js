@@ -4,13 +4,15 @@ const session = require("express-session")
 const UserRoutes = require("./routes/Customer/UserRoutes");
 const AdminRoutes = require("./routes/Admin/AdminRoutes"); // Ensure this file exists and is correctly imported
 const ProductRoutes = require("./routes/Admin/ProductRoutes");
-const GetAllProductRoutes = require("./routes/Admin/GetProductRoutes");
+const GetAllProductRoutes = require("./routes/Admin/FetchAllOrderRoutes-bkp");
 const OrderRoutes = require("./routes/Customer/OrderRoutes");
 const LogoutRoutes = require("./routes/Customer/LogoutRoutes");
 const SearchRoutes = require("./routes/Customer/SearchProductRoutes");
 const CancelOrderRoutes = require("./routes/Customer/CancelOrderRoutes");
 const GetAllOrderRoutes = require("./routes/Customer/GetAllOrderRoutes");
 const AddToCartRoutes = require("./routes/Customer/AddToCartRoutes");
+const UpdateUserDetailsRoutes = require("./routes/Customer/UserRoutes");
+const FetchAllOrderRoutes = require("./routes/Admin/FetchAllOrderRoutes");
 
 
 const app = express();
@@ -40,6 +42,8 @@ app.use("/search", SearchRoutes);
 app.use("/cancel", CancelOrderRoutes);
 app.use("/getOrders", GetAllOrderRoutes);
 app.use("/Cart", AddToCartRoutes);
+app.use("/updateUser", UpdateUserDetailsRoutes);
+app.use("/FetchAllOrder", FetchAllOrderRoutes);
 
 app.listen(4000, () => {
     console.log("Server is running on port 4000");

@@ -1,3 +1,4 @@
+
 const bcrypt = require('bcrypt');
 const Admin = require('../../models/Admin/AdminSchema');
 const jwt = require('jsonwebtoken');
@@ -65,14 +66,19 @@ const signin = async (req, res) => {
             return res.status(401).json({ error: "Invalid credentials" });
         }
 
+         // Create a session for the user
+         req.session._id = existingUser._id;
+         console.log(req.session._id);
+
+
         // Generate a token
-        const token = jwt.sign(
-            { email: existingUser.email, phone: existingUser.phone, id: existingUser._id },
-            SECRET_KEY
-        );
+        // const token = jwt.sign(
+        //     { email: existingUser.email, phone: existingUser.phone, id: existingUser._id },
+        //     SECRET_KEY
+        // );
 
         // Send response with user data and token
-        return res.status(200).json({ existingUser, token });
+        return res.status(200).json({ message: "Login successful", user: req.session._id});
 
     } catch (error) {
         console.error("Signin Error: ", error);

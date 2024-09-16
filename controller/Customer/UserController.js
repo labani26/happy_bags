@@ -70,7 +70,6 @@ const signin = async (req, res) => {
           // Create a session for the user
             req.session._id = existingUser._id;
             console.log(req.session._id);
-            // return res.status(200).json({ message: "Welcome" }); 
 
 
            // Send a success response
