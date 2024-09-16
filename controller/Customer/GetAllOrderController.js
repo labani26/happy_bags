@@ -4,7 +4,7 @@ const getAllOrder = async (req,res) => {
 
         if (!req.session._id) {
             return res.status(401).json({ message: 'You must be logged in to view your order.' });
-        } 
+        }
 
     try{
         const getOrder = await Order.find({ customerId: req.session._id });
@@ -13,7 +13,7 @@ const getAllOrder = async (req,res) => {
             return res.status(404).json({ message: 'Orders retrieved successfully', getOrder})
         }
 
-        res.send(result);
+        res.send(getOrder);
 
     } catch (error) {
         return res.status(500).json({ message: 'Failed to  retrive orders', error });

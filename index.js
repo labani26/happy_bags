@@ -10,6 +10,7 @@ const LogoutRoutes = require("./routes/Customer/LogoutRoutes");
 const SearchRoutes = require("./routes/Customer/SearchProductRoutes");
 const CancelOrderRoutes = require("./routes/Customer/CancelOrderRoutes");
 const GetAllOrderRoutes = require("./routes/Customer/GetAllOrderRoutes");
+const AddToCartRoutes = require("./routes/Customer/AddToCartRoutes");
 
 
 const app = express();
@@ -38,6 +39,7 @@ app.use("/logout", LogoutRoutes);
 app.use("/search", SearchRoutes);
 app.use("/cancel", CancelOrderRoutes);
 app.use("/getOrders", GetAllOrderRoutes);
+app.use("/Cart", AddToCartRoutes);
 
 app.listen(4000, () => {
     console.log("Server is running on port 4000");
