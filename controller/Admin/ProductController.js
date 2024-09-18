@@ -1,6 +1,6 @@
 const Product = require('../../models/Admin/ProductSchema');
 
-const addProduct = async (req, res) => {
+const Products = async (req, res) => {
     const { name, description, category, price, material, image, number_of_pocket, country_of_origin } = req.body;
 
     try {
@@ -27,4 +27,4 @@ const addProduct = async (req, res) => {
     }
 };
 
-module.exports = { addProduct };
+module.exports = { Products };

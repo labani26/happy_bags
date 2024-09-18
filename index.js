@@ -13,11 +13,11 @@ const GetAllOrderRoutes = require("./routes/Customer/GetAllOrderRoutes");
 const AddToCartRoutes = require("./routes/Customer/AddToCartRoutes");
 const UpdateUserDetailsRoutes = require("./routes/Customer/UserRoutes");
 const FetchAllOrderRoutes = require("./routes/Admin/FetchAllOrderRoutes");
-
+const cors = require('cors');
 
 const app = express();
 
-
+app.use(cors());
 app.use(session({
     secret: 'HAPPY_BAGS_SECRET',
     resave: false,
