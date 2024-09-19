@@ -10,8 +10,8 @@
     border-radius: 8px;
 }
 .product-item:hover {
-    -ms-transform: scale(1.2); /* IE 9 */
-    -webkit-transform: scale(1.2); /* Safari 3-8 */
+    -ms-transform: scale(1.2); 
+    -webkit-transform: scale(1.2); 
     transform: scale(1.2); 
   }
 .add-cart-btn {

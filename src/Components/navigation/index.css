@@ -40,10 +40,10 @@ nav{
     font-family: "Sofia", sans-serif;
     font-size: 50px;
     text-shadow: 3px 3px 3px #ee1b1b;
-}
-.bagname:hover {
-    -ms-transform: scale(1.2); /* IE 9 */
-    -webkit-transform: scale(1.2); /* Safari 3-8 */
+} */
+ .bagname:hover {
+    -ms-transform: scale(1.2); 
+    -webkit-transform: scale(1.2); 
     transform: scale(1.2); 
   }
 .nav-menu {
@@ -62,7 +62,7 @@ nav{
     font-size: 30px;
     font-weight: 10%;
 
-}
-/* .underline {
-    color: rgb(240, 11, 182);
 } */
+ .underline {
+    color: rgb(240, 11, 182);
+}
