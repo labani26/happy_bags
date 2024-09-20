@@ -1,10 +1,17 @@
 const Product = require('../../models/Admin/ProductSchema');
 
 const Products = async (req, res) => {
-    const { name, description, category, price, material, image, number_of_pocket, country_of_origin } = req.body;
+    const { name, description, category, price, material, image, number_of_pocket, country_of_origin, count } = req.body;
 
     try {
-
+        const updatedProduct = await Product.findOneAndUpdate(
+            { name: name }, 
+            { $inc: { count: count } }, 
+            { new: true } 
+        );
+        if(updatedProduct){
+            return res.status(200).json({"message": "Product uploaded"});
+        }
 
         // Add a new Product
         const ProductUpload = new Product ({
@@ -15,7 +22,8 @@ const Products = async (req, res) => {
             material, 
             image,
             number_of_pocket, 
-            country_of_origin
+            country_of_origin,
+            count
         });
         
         // Save the product to the database

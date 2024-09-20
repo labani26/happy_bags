@@ -17,7 +17,6 @@ const OrderSchema = new mongoose.Schema({
     },
     paymentStatus: {
         type: String,
-        required: true ,
         default: 'pending'
     },
     orderTime: {

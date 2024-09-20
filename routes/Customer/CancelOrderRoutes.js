@@ -4,6 +4,6 @@ const router = express.Router();
 
 
 // Route to cancel an order
-router.patch('/cancelOrder/:orderId', cancelOrder);
+router.patch('/cancelOrder', cancelOrder);
 
 module.exports = router;

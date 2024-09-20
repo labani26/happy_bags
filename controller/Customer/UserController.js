@@ -47,33 +47,39 @@ const signin = async (req, res) => {
     // Destructure fields from request body
     const { email, phone, password } = req.body;
 
+
     // Validate fields
-    if (!password || (!email && !phone)) {
+    if (email || phone) {
+        if (!password) {
+            return res.status(400).json({ message: "Email or phone number, password are required" });
+        }
+    }
+    else {
         return res.status(400).json({ message: "Email or phone number, password are required" });
     }
 
     try {
         // Check if the user exists with either email or phone
-        const existingUser = await Customer.findOne({ $or: [{ email }, { phone }] });
+        const existingUser = await Customer.findOne({ $or: [{ email: email }, { phone: phone }] });
 
         if (!existingUser) {
-            return res.status(401).json({ error: "User not found" });
+            return res.status(401).json({ message: "User not found" });
         }
 
         // Compare the password with the stored hashed password
         const passwordMatch = await bcrypt.compare(password, existingUser.password);
 
         if (!passwordMatch) {
-            return res.status(401).json({ error: "Invalid credentials" });
+            return res.status(401).json({ message: "Invalid credentials" });
         }
 
-          // Create a session for the user
-            req.session._id = existingUser._id;
-            console.log(req.session._id);
+        // Create a session for the user
+        req.session._id = existingUser._id;
+        console.log(req.session._id);
 
 
-           // Send a success response
-            return res.status(200).json({ message: "Login successful", user: req.session._id});
+        // Send a success response
+        return res.status(200).json({ message: "Login successful", user: req.session._id });
 
         // Generate a token
         // const token = jwt.sign(
@@ -92,4 +98,4 @@ const signin = async (req, res) => {
 
 
 
-module.exports = { signup , signin };
+module.exports = { signup, signin };

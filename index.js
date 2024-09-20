@@ -4,18 +4,21 @@ const session = require("express-session")
 const UserRoutes = require("./routes/Customer/UserRoutes");
 const AdminRoutes = require("./routes/Admin/AdminRoutes"); // Ensure this file exists and is correctly imported
 const ProductRoutes = require("./routes/Admin/ProductRoutes");
-const GetAllProductRoutes = require("./routes/Admin/FetchAllOrderRoutes-bkp");
+const FetchAllOrderRoutes = require("./routes/Admin/FetchAllOrderRoutes");
 const OrderRoutes = require("./routes/Customer/OrderRoutes");
 const LogoutRoutes = require("./routes/Customer/LogoutRoutes");
 const SearchRoutes = require("./routes/Customer/SearchProductRoutes");
 const CancelOrderRoutes = require("./routes/Customer/CancelOrderRoutes");
-const GetAllOrderRoutes = require("./routes/Customer/GetAllOrderRoutes");
+const GetMyOrderRoutes = require("./routes/Customer/GetMyOrderRoutes");
 const AddToCartRoutes = require("./routes/Customer/AddToCartRoutes");
-const UpdateUserDetailsRoutes = require("./routes/Customer/UserRoutes");
-const FetchAllOrderRoutes = require("./routes/Admin/FetchAllOrderRoutes");
+const GetAllProductRoutes = require("./routes/Customer/GetAllProductRoutes")
+const path = require('path');
+
 const cors = require('cors');
+// const getAllProduct = require("./controller/Customer/GetProductController");
 
 const app = express();
+app.use('/static', express.static(path.join(__dirname, 'images')));
 
 app.use(cors());
 app.use(session({
@@ -32,18 +35,20 @@ app.get("/", (req, res) => {
 
 MongoConnect(); // Ensure MongoConnect is correctly setting up your database connection
 
-app.use("/user", UserRoutes);
-app.use("/admin", AdminRoutes); // Added this line to correctly use AdminRoutes
-app.use("/product", ProductRoutes);
-app.use("/getProduct", GetAllProductRoutes);
-app.use("/order",OrderRoutes);
-app.use("/logout", LogoutRoutes);
-app.use("/search", SearchRoutes);
-app.use("/cancel", CancelOrderRoutes);
-app.use("/getOrders", GetAllOrderRoutes);
-app.use("/Cart", AddToCartRoutes);
-app.use("/updateUser", UpdateUserDetailsRoutes);
-app.use("/FetchAllOrder", FetchAllOrderRoutes);
+app.use("/user", LogoutRoutes);
+app.use("/admin", AdminRoutes); 
+app.use("/admin", ProductRoutes);
+app.use("/admin", FetchAllOrderRoutes);
+app.use("/customer", UserRoutes);
+app.use("/customer",OrderRoutes);
+app.use("/customer", SearchRoutes);
+app.use("/customer", CancelOrderRoutes);
+// app.use("/customer", GetMyOrderRoutes);
+app.use("/customer", AddToCartRoutes);
+app.use("/customer", GetAllProductRoutes);
+// app.use("/customer", UpdateUserDetailsRoutes);
+// app.use("/FetchAllOrder", FetchAllOrderRoutes);
+
 
 app.listen(4000, () => {
     console.log("Server is running on port 4000");

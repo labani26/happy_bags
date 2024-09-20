@@ -10,7 +10,7 @@ const cancelOrder = async (req, res) => {
 
     try {
         // Find the order by ID and ensure it belongs to the logged-in user
-        const order = await Order.deleteOne({ _id: orderId, customerId: req.session._id });
+        const order = await Order.findOne({ _id: orderId });
 
         if (!order) {
             return res.status(404).json({ message: 'Order not found or you are not authorized to cancel this order.' });
@@ -23,6 +23,12 @@ const cancelOrder = async (req, res) => {
 
         // Update the status to cancelled
         order.orderStatus = 'cancelled';
+        if(order.paymentStatus == 'paid') {
+            order.paymentStatus = 'refund';
+        }
+        else { 
+            order.paymentStatus = 'no-refund';
+        }
 
         // Save the updated order to the database
         await order.save();

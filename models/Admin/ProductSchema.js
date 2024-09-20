@@ -40,7 +40,7 @@ const ProductSchema = new mongoose.Schema (
             require: true 
         },
         count: {
-            type: String,
+            type: Number,
             require: true  
         }
 
