@@ -9,7 +9,8 @@ import Loginform from "./Components/loginForm/Loginform";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import axios from "axios";
 import "./App.css"
-
+import AdminLogin from "./Components/adminLogin/adminLogin";
+import AdminSignup from "./Components/adminSignup/adminSignup";
 
 
 
@@ -362,7 +363,7 @@ import "./App.css"
 const App = () => {
   // State for cart count
     const [cartCount, setCartCount] = useState(0);
-    const [dealslist, setDealsList] = useState([]);
+    // const [dealslist, setDealsList] = useState([]);
     const [allProductlist, setAllProductList] = useState([]);
 
   const fetchProducts = async() => {  //This asynchronous function fetches product data from a backend API
@@ -383,16 +384,10 @@ const App = () => {
       const products = await fetchProducts();
       
       if (Array.isArray(products)) {   // Check if the "products" variable is an array
-
-        setDealsList(products.slice(0, 10));  // If it's an array, set the first 10 products in the 'dealslist' state // Only call .slice on arrays
-
         setAllProductList(products);  // Set all products
 
       } else {
         console.error("Products is not an array:", products);
-
-        setDealsList([]);  // Set 'dealslist' to an empty array as a fallback // Handle cases where products isn't an array
-
         setAllProductList([]); // Set 'allProductlist' to an empty array as well // Handle cases where products isn't an array
       }
     };
@@ -418,7 +413,7 @@ const App = () => {
             path="/"
             element={
               <>
-                <div className="product-selection">
+                {/* <div className="product-selection">
                   <h2 className="deal">Deals of the Day</h2>
                   <ul className="product-row-list">
                     {dealslist.map((product) => (
@@ -429,7 +424,7 @@ const App = () => {
                       />
                     ))}
                   </ul>
-                </div>
+                </div> */}
 
                 <div className="product-selection">
                   <h2 className="deal">All Products</h2>
@@ -437,7 +432,7 @@ const App = () => {
                     {allProductlist.map((product) => (
                       <ProductItem
                         product={product}
-                        key={product.id}
+                        key={product._id}
                         onAddClicked={onAddClicked}
                       />
                     ))}
@@ -449,6 +444,8 @@ const App = () => {
           <Route exact path = "/About" element={<About/>} />
           <Route exact path = "/Signup" element={<SignupForm />} />
           <Route exact path="/Login" element={<Loginform />} />
+          <Route exact path="/adminLogin" element={< AdminLogin />} />
+          <Route exact path="/adminSignup" element={< AdminSignup />} />
         </Routes>
         {/* Footer */}
         <Footer />
