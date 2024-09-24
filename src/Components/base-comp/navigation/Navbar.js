@@ -60,22 +60,54 @@
 // export default Navbar;
 
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const Navbar = (props) => {
-
   const { count } = props;
+  const navigate = useNavigate();
+
+
+  const handleLogout = async () => {
+    try {
+      const response = await fetch('/customer/logoutWebsite',{
+        method: 'POST',
+        credentials: 'include'
+
+      });
+
+      if (response.ok) {
+        sessionStorage.removeItem('session._id');
+
+      console.log('Logout Successful:', response);
+      alert('Logout successful!');
+      navigate('/login'); 
+
+    } else {
+      alert('Failed to log out.');
+    }
+
+  } catch (error) {
+    console.error("Error logging out:", error);
+    alert('An error occurred while logging out.');
+  }
+  }
 
   return (
-
-
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
         <li>
-          <Link className="navbar-brand" to="/">H@ppy Bags :)</Link> {/* Corrected the Link component usage */}
+          <Link className="navbar-brand" to="/">H@ppy Bags :)</Link>
         </li>
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -92,15 +124,13 @@ const Navbar = (props) => {
           </ul>
           <form className="d-flex">
             <Link className="btn btn-primary mx-4 mb-3" to="/login" role="button">Login</Link>
-            <Link className="btn btn-primary mx-4" to="/signup" role="button">Signup</Link>
+            <Link className="btn btn-primary mx-4 mb-3" to="/signup" role="button">Signup</Link>
           </form>
-          :
-          <button className="btn btn-primary"> Logout </button>
+          <button className="btn btn-primary mx-4 mb-3" onClick={handleLogout}>Logout</button>
         </div>
       </div>
     </nav>
+  );
+};
 
-  )
-
-}
 export default Navbar;

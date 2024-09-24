@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 
-const LoginForm = () => {
+const AdminLogin = () => {
 
-  const [emailOrPhone, setEmailOrPhone] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setemail] = useState('');
+  const [password, setpassword] = useState('');
+
   const navigate = useNavigate(); // Initialize navigate
 
 
@@ -15,9 +15,9 @@ const LoginForm = () => {
 
     try {
       // Make a POST request to the login API
-      const response = await axios.post('http://localhost:4000/user/signin', {
-        emailOrPhone, password // Send the user's email/phone, password
-
+      const response = await axios.post('http://localhost:4000/admin/signin', {
+        email: email,  // Correct variable name
+        password: password           // Correct variable name
       });
 
       // Handle successful login response
@@ -25,43 +25,42 @@ const LoginForm = () => {
       alert('Login successful!');
 
       // Navigate to the product listing or dashboard after successful login
-      navigate('/'); // Change '/products' to the desired route
-
+      navigate('/addProduct'); // Change '/products' to the desired route
 
     } catch (error) {
       console.error('Login Error:', error);
-      alert('Login failed, please try again.');
+      alert("Something went error :" ,error);
     }
   };
 
   return (
     <div className='container mb-3'>
-      <h2 className='my-3'>Login</h2>
+      <h2 className='my-3'><u>Admin Login</u> </h2>
       <form onSubmit={handleSubmit}>
         {/* Email Field */}
         <div className="mb-3">
-          <label htmlFor="emailorphone" className="form-label">Email address or Phone number</label>
+          <label htmlFor="email" className="form-label">Email address or Phone number</label>
           <input
             type="text"
             className="form-control"
-            id="emailOrPhone"
-            value={emailOrPhone}
-            onChange={(e) => setEmailOrPhone(e.target.value)} // Update email/phone state
+            id="email"
+            value={email}
+            onChange={(e) => setemail(e.target.value)} // Update email/phone state
             aria-describedby="emailorphoneHelp"
-            placeholder="Enter your email or phone number"
+            placeholder="Enter Admin email or phone number"
             required
           />
         </div>
 
         {/* Password Field */}
         <div className="mb-3">
-          <label htmlFor="Password1" className="form-label">Password</label>
+          <label htmlFor="password" className="form-label">Password</label>
           <input
             type="password"
             className="form-control"
             id="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}  // Update password state
+            onChange={(e) => setpassword(e.target.value)}  // Update password state
             placeholder="Enter your password"
             required
           />
@@ -70,9 +69,8 @@ const LoginForm = () => {
           <div className="submit"><button type="submit" className="btn btn-primary">Submit</button></div>
         </div>
       </form>
-      <div className="container"><p><Link to="/adminLogin" className="my-link-class">Admin Login</Link></p></div>
     </div>
   );
 };
 
-export default LoginForm;
+export default AdminLogin;

@@ -1,6 +1,6 @@
-import footer1 from "../images/both.png";
+import footer1 from "../../images/both.png";
 // import footer2 from "../images/socialmedia.png";
-import logo from "../images/whatsapp.jpeg";
+import logo from "../../images/whatsapp.jpeg";
 import "./index.css";
 
 const Footer = () => (
@@ -26,7 +26,7 @@ const Footer = () => (
       </div>
 
       {/* Column 3 - Useful Links */}
-      <div className="footer-col-3">
+      {/* <div className="footer-col-3">
         <h3>Useful Links:</h3>
         <ul>
           <li>Coupons</li>
@@ -34,7 +34,7 @@ const Footer = () => (
           <li>Return Policy</li>
           <li>Join Affiliate Program</li>
         </ul>
-      </div>
+      </div> */}
 
       {/* Column 4 - Social Media Links */}
       <div className="footer-col-4">

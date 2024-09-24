@@ -34,7 +34,7 @@ const SignupForm = () => {
 
     return (
         <div className='container mb-3'>
-            <h2 className='my-3'>Create an account</h2>
+            <h2 className='my-3'><u>Create an account</u></h2>
             <form onSubmit={onSubmit}>
                 <div className="my-3">
                     <label htmlFor="username" className="form-label">Username</label>

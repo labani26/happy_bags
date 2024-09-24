@@ -1,4 +1,4 @@
-import bag_banner from "../images/sale50.jpg";
+import bag_banner from "../../images/sale50.jpg";
 import "./index.css";
 
 const Banner = () => (

@@ -1,17 +1,19 @@
 import { useState, useEffect } from "react";
-import Navbar from "./Components/navigation/Navbar";
-import Banner from "./Components/banner";
-import Footer from "./Components/footer";
-import ProductItem from "./Components/deal-item";
-import About from "./Components/about/About";
-import SignupForm from "./Components/signupForm/SignupForm";
-import Loginform from "./Components/loginForm/Loginform";
+import Navbar from "./Components/base-comp/navigation/Navbar";
+import Banner from "./Components/base-comp/banner";
+import Footer from "./Components/base-comp/footer";
+import ProductItem from "./Components/customer/deal-item";
+import About from "./Components/base-comp/about/About";
+import SignupForm from "./Components/customer/signupForm/SignupForm";
+import Loginform from "./Components/customer/loginForm/Loginform";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import axios from "axios";
 import "./App.css"
-import AdminLogin from "./Components/adminLogin/adminLogin";
-import AdminSignup from "./Components/adminSignup/adminSignup";
-
+import AdminLogin from "./Components/admins/adminLogin/adminLogin";
+import AdminSignup from "./Components/admins/adminSignup/adminSignup";
+import AdminAddProduct from "./Components/admins/adminAddProduct/adminAddProduct";
+import UpdateUserDetails from "./Components/customer/updateUserDetails/UpdateUserDetails";
+import CreateOrder from "./Components/customer/createOrder/CreateOrder";
 
 
 // import ControlledCarousel from "./Components/carousel";
@@ -413,19 +415,6 @@ const App = () => {
             path="/"
             element={
               <>
-                {/* <div className="product-selection">
-                  <h2 className="deal">Deals of the Day</h2>
-                  <ul className="product-row-list">
-                    {dealslist.map((product) => (
-                      <ProductItem
-                        product={product}
-                        key={product.id}
-                        onAddClicked={onAddClicked}
-                      />
-                    ))}
-                  </ul>
-                </div> */}
-
                 <div className="product-selection">
                   <h2 className="deal">All Products</h2>
                   <ul className="product-row-list">
@@ -446,6 +435,9 @@ const App = () => {
           <Route exact path="/Login" element={<Loginform />} />
           <Route exact path="/adminLogin" element={< AdminLogin />} />
           <Route exact path="/adminSignup" element={< AdminSignup />} />
+          <Route exact path="/addProduct" element={< AdminAddProduct />} />
+          <Route exact path="/updateUserDetails" element={< UpdateUserDetails />} />
+          <Route exact path="/createOrder" element={< CreateOrder />} />
         </Routes>
         {/* Footer */}
         <Footer />
