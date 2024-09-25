@@ -1,10 +1,8 @@
 const bcrypt = require('bcrypt');
 const Customer = require('../../models/Customer/UserSchema');
 const jwt = require('jsonwebtoken');
-// const session = require("express-session");
-const { json } = require('express');
 
-const SECRET_KEY = "USERS_SECRET_KEY"; // Define a secret key
+const SECRET_KEY = "HAPPY_BAGS";  // Store in environment variables in production
 
 // Register new user
 const signup = async (req, res) => {
@@ -32,7 +30,11 @@ const signup = async (req, res) => {
         await newUser.save();
 
         // Generate a JWT token
-        const token = jwt.sign({ id: newUser._id, email: newUser.email, phone: newUser.phone }, SECRET_KEY, { expiresIn: '1h' });
+        const token = jwt.sign(
+            { id: newUser._id, email: newUser.email, phone: newUser.phone },
+            SECRET_KEY,
+            { expiresIn: '1h' }
+        );
 
         // Respond with the created user and token
         res.status(201).json({ message: "User registered successfully", user: newUser, token });
@@ -42,25 +44,18 @@ const signup = async (req, res) => {
     }
 };
 
-
+// Sign in existing user
 const signin = async (req, res) => {
-    // Destructure fields from request body
     const { email, phone, password } = req.body;
 
-
     // Validate fields
-    if (email || phone) {
-        if (!password) {
-            return res.status(400).json({ message: "Email or phone number, password are required" });
-        }
-    }
-    else {
-        return res.status(400).json({ message: "Email or phone number, password are required" });
+    if (!(email || phone) || !password) {
+        return res.status(400).json({ message: "Email or phone number and password are required" });
     }
 
     try {
         // Check if the user exists with either email or phone
-        const existingUser = await Customer.findOne({ $or: [{ email: email }, { phone: phone }] });
+        const existingUser = await Customer.findOne({ $or: [{ email }, { phone }] });
 
         if (!existingUser) {
             return res.status(401).json({ message: "User not found" });
@@ -73,29 +68,28 @@ const signin = async (req, res) => {
             return res.status(401).json({ message: "Invalid credentials" });
         }
 
-        // Create a session for the user
-        req.session._id = existingUser._id;
-        console.log(req.session._id);
+        // Generate a JWT token
+        const token = jwt.sign(
+            { id: existingUser._id, email: existingUser.email, phone: existingUser.phone },
+            SECRET_KEY,
+            { expiresIn: '1h' }
+        );
 
-
-        // Send a success response
-        return res.status(200).json({ message: "Login successful", user: req.session._id });
-
-        // Generate a token
-        // const token = jwt.sign(
-        //     { email: existingUser.email, phone: existingUser.phone, id: existingUser._id },
-        //     SECRET_KEY
-        // );
-
-        // // Send response with user data and token
-        // return res.status(200).json({ existingUser, token })  
+        // Send the response with user data and token
+        return res.status(200).json({
+            message: "Login successful",
+            user: {
+                id: existingUser._id,
+                email: existingUser.email,
+                phone: existingUser.phone
+            },
+            token
+        });
 
     } catch (error) {
         console.error("Signin Error: ", error);
         return res.status(500).json({ error: "Internal server error" });
     }
 };
-
-
 
 module.exports = { signup, signin };

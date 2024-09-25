@@ -1,6 +1,5 @@
 const express = require("express");
 const MongoConnect = require("./controller/MongoConnect");
-const session = require("express-session")
 const UserRoutes = require("./routes/Customer/UserRoutes");
 const AdminRoutes = require("./routes/Admin/AdminRoutes"); // Ensure this file exists and is correctly imported
 const ProductRoutes = require("./routes/Admin/ProductRoutes");
@@ -13,21 +12,53 @@ const GetMyOrderRoutes = require("./routes/Customer/GetMyOrderRoutes");
 const AddToCartRoutes = require("./routes/Customer/AddToCartRoutes");
 const GetAllProductRoutes = require("./routes/Customer/GetAllProductRoutes")
 const path = require('path');
-
+const app = express();
 const cors = require('cors');
 // const getAllProduct = require("./controller/Customer/GetProductController");
+const passport = require('passport');
+const session = require('express-session');
+require('./passportConfig');
 
-const app = express();
-app.use('/static', express.static(path.join(__dirname, 'images')));
-
-app.use(cors());
-app.use(session({
-    secret: 'HAPPY_BAGS_SECRET',
-    resave: false,
-    saveUninitialized: true,
-}))
 
 app.use(express.json());
+app.use('/static', express.static(path.join(__dirname, 'images')));
+
+app.use(cors({
+    origin: 'http://localhost:3000', // Replace with your actual frontend URL
+    credentials: true,
+    methods: ['POST', 'PATCH', 'GET', 'OPTIONS']
+}));
+  app.use(session({
+    secret: 'HAPPY_BAGS_SECRET',
+    resave: false,
+    saveUninitialized: false, // Change this to false for better control over session creation
+    cookie: {
+        sameSite: 'None',
+        secure: false, // Set to true if using HTTPS
+        httpOnly: true,
+        maxAge: 1000 * 60 * 60 // 1 hour
+    }
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser((user, done) => {
+    done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+    // Find the user by ID from your database
+    Customer.findById(id, (err, user) => {
+        done(err, user);
+    });
+
+});
+
+app.use((req, res, next) => {
+    console.log("HTTP Method - "+ req.method + " , URL - " + req.url +  "Current Session:", req.session);
+    next();
+});
 
 app.get("/", (req, res) => {
     res.send("Hello World");
@@ -50,6 +81,6 @@ app.use("/customer", GetAllProductRoutes);
 // app.use("/FetchAllOrder", FetchAllOrderRoutes);
 
 
-app.listen(4000, () => {
+app.listen(4000, '0.0.0.0', () => {
     console.log("Server is running on port 4000");
 });

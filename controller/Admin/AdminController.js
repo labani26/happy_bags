@@ -47,7 +47,12 @@ const signin = async (req, res) => {
     const { email, phone, password } = req.body;
 
     // Validate fields
-    if (!password || (!email && !phone)) {
+    if (email || phone) {
+        if (!password) {
+            return res.status(400).json({ message: "Email or phone number, password are required" });
+        }
+    }
+    else {
         return res.status(400).json({ message: "Email or phone number, password are required" });
     }
 
