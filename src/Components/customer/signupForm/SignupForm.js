@@ -24,7 +24,7 @@ const SignupForm = () => {
                 console.log('Signup Successful:');
                 alert('Signup successful!');
     
-                navigate('/login')
+                navigate('/')
             }
             else {
                 alert("Password mismatch!!!");
