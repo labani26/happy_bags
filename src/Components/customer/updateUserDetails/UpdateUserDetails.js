@@ -1,42 +1,36 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie';
+// import axios from 'axios';
+// import { useNavigate } from "react-router-dom";
+// import api from '../../../api';
 
 const UpdateUserDetails = () => {
-    const [address, setAddress] = useState({
-        state: '',
-        city: '',
-        zipCode: '',
-        land_mark: ''
-    });
+    const [address, setAddress] = useState({ state: '', city: '', zipCode: '', land_mark: '' });
+    const [message, setMessage] = useState('');
 
-    const navigate = useNavigate(); 
-
-    // Handle input changes for the address form
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setAddress({
-            ...address,
-            [name]: value,
-        });
-    };
-
-    // Navigate to the createOrder page
-    const clickToContinue = () => {
-        navigate('/createOrder');
-    };
-
-    // Submit the form data to the backend
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         try {
-            const response = await axios.post('http://localhost:4000/customer/updateUserDetails', { address });
-            console.log('Update successful:', response);
-            alert('Update successful!');
+            // Get the token from the cookies
+            const token = Cookies.get('token');
+
+            // Make a request to update the address with the token in the header
+            const response = await axios.post(
+                'http://localhost:4000/customer/updateUserDetails',
+                { address },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,  // Add the token here
+                    },
+                }
+            );
+
+            setMessage('Address updated successfully!');
+            alert(message)
         } catch (error) {
-            console.error('Update Error:', error);
-            alert(error);
+            console.error('Error updating address:', error);
+            setMessage('Failed to update address');
         }
     };
 
@@ -51,7 +45,7 @@ const UpdateUserDetails = () => {
                         className="form-control"
                         name="state"
                         value={address.state}
-                        onChange={handleInputChange}
+                        onChange={(e) => setAddress({ ...address, state: e.target.value })}
                         placeholder="State"
                         required
                     />
@@ -63,7 +57,7 @@ const UpdateUserDetails = () => {
                         className="form-control"
                         name="city"
                         value={address.city}
-                        onChange={handleInputChange}
+                        onChange={(e) => setAddress({ ...address, city: e.target.value })}
                         placeholder="City"
                         required
                     />
@@ -75,7 +69,7 @@ const UpdateUserDetails = () => {
                         className="form-control"
                         name="zipCode"
                         value={address.zipCode}
-                        onChange={handleInputChange}
+                        onChange={(e) => setAddress({ ...address, zipCode: e.target.value })}
                         placeholder="Zip Code"
                         required
                     />
@@ -87,18 +81,18 @@ const UpdateUserDetails = () => {
                         className="form-control"
                         name="land_mark"
                         value={address.land_mark}
-                        onChange={handleInputChange}
+                        onChange={(e) => setAddress({ ...address, land_mark: e.target.value })}
                         placeholder="Land Mark"
                         required
                     />
                 </div>
                 <div className="grid text-center mt-3">
                     <button className="btn btn-primary" type="submit">Update Address</button>
-                </div> 
+                </div>
             </form>
-            <div className="grid text-center mt-3">
+            {/* <div className="grid text-center mt-3">
                 <button className="btn btn-secondary" type="button" onClick={clickToContinue}>Continue</button>
-            </div>
+            </div> */}
         </div>
     );
 };

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
 
-  const [emailOrPhone, setEmailOrPhone] = useState('');
+  const [email, setemail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate(); // Initialize navigate
 
@@ -15,8 +15,8 @@ const LoginForm = () => {
 
     try {
       // Make a POST request to the login API
-      const response = await axios.post('http://localhost:4000/user/signin', {
-        emailOrPhone, password // Send the user's email/phone, password
+      const response = await axios.post('http://localhost:4000/customer/signin', {
+        email, password // Send the user's email/phone, password
 
       });
 
@@ -25,7 +25,7 @@ const LoginForm = () => {
       alert('Login successful!');
 
       // Navigate to the product listing or dashboard after successful login
-      navigate('/'); // Change '/products' to the desired route
+      navigate('/Bay'); // Change '/products' to the desired route
 
 
     } catch (error) {
@@ -40,14 +40,14 @@ const LoginForm = () => {
       <form onSubmit={handleSubmit}>
         {/* Email Field */}
         <div className="mb-3">
-          <label htmlFor="emailorphone" className="form-label">Email address or Phone number</label>
+          <label htmlFor="email" className="form-label">Email address or Phone number</label>
           <input
             type="text"
             className="form-control"
-            id="emailOrPhone"
-            value={emailOrPhone}
-            onChange={(e) => setEmailOrPhone(e.target.value)} // Update email/phone state
-            aria-describedby="emailorphoneHelp"
+            id="email"
+            value={email}
+            onChange={(e) => setemail(e.target.value)} // Update email/phone state
+            aria-describedby="emailHelp"
             placeholder="Enter your email or phone number"
             required
           />

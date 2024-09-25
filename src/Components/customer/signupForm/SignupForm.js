@@ -17,18 +17,22 @@ const SignupForm = () => {
         e.preventDefault();
 
         try {
-            const responseTo = await axios.post('http://localhost:4000/user/signup', {
-                name, email, phone, password
-            });
-
-            console.log('Signup Successful:', responseTo);
-            alert('Signup successful!');
-
-            navigate('/login')
-
+            if(password === conPassword) {
+                await axios.post('http://localhost:4000/customer/signup', {
+                    name, email, phone, password
+                });
+                console.log('Signup Successful:');
+                alert('Signup successful!');
+    
+                navigate('/login')
+            }
+            else {
+                alert("Password mismatch!!!");
+            }
         } catch (error) {
             console.error('Signup Error:', error);
-            alert('Signup failed, please try again.');
+            alert(error);
+            console.log(error.response.data)
         }
     };
 

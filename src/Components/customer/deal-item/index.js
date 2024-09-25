@@ -19,10 +19,10 @@ const ProductItem = (props) => {
   };
 
   const buyNow = () => {
-     navigate('/updateUserDetails')
+     navigate('/updateUserDetails', { state: product._id })
   }
 
-  const imageUrl = `http://localhost:4000${product.image}`;
+  const imageUrl = `http://192.168.1.9:4000${product.image}`;
 
   return (
     <li className="product-item">
