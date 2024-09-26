@@ -11,6 +11,7 @@ const CancelOrderRoutes = require("./routes/Customer/CancelOrderRoutes");
 const GetMyOrderRoutes = require("./routes/Customer/GetMyOrderRoutes");
 const AddToCartRoutes = require("./routes/Customer/AddToCartRoutes");
 const GetAllProductRoutes = require("./routes/Customer/GetAllProductRoutes")
+const GetProductByIdRoute = require("./routes/Customer/getProductByIdRoute")
 const path = require('path');
 const app = express();
 const cors = require('cors');
@@ -26,7 +27,7 @@ app.use('/static', express.static(path.join(__dirname, 'images')));
 app.use(cors({
     origin: 'http://localhost:3000', // Replace with your actual frontend URL
     credentials: true,
-    methods: ['POST', 'PATCH', 'GET', 'OPTIONS']
+    methods: ['POST', 'PATCH', 'GET', 'OPTIONS', 'DELETE']
 }));
   app.use(session({
     secret: 'HAPPY_BAGS_SECRET',
@@ -77,6 +78,7 @@ app.use("/customer", CancelOrderRoutes);
 // app.use("/customer", GetMyOrderRoutes);
 app.use("/customer", AddToCartRoutes);
 app.use("/customer", GetAllProductRoutes);
+app.use("/customer", GetProductByIdRoute)
 // app.use("/customer", UpdateUserDetailsRoutes);
 // app.use("/FetchAllOrder", FetchAllOrderRoutes);
 
