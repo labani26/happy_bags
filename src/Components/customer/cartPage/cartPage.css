@@ -1,0 +1,22 @@
+.cart-page {
+    padding: 20px;
+}
+
+.cart-item-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.cart-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.cart-item button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}

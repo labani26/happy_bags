@@ -1,59 +1,44 @@
-// ProductItem.js
-
-import "./index.css";
+import "./index.css"; // Your existing CSS for custom styles
 import { useNavigate } from "react-router-dom";
 
 const ProductItem = (props) => {
   const { product, onAddClicked } = props; // Destructure props
-  console.log("Product Image URL:", product.image); // Log the image URL for debugging
+  const navigate = useNavigate();
 
-
-
-  const navigate = useNavigate();   
-
-
-  // Function to handle 'Add to Cart' button click
   const addToCart = () => {
     onAddClicked(); // Trigger the parent function to handle adding the product to the cart
     console.log("Add button Clicked"); // Log for debugging
   };
 
   const buyNow = () => {
-     navigate('/updateUserDetails', { state: product._id })
+    navigate('/updateUserDetails', { state: product._id });
   }
 
   const imageUrl = `http://192.168.1.9:4000${product.image}`;
 
   return (
-    <li className="product-item">
-      {/* Display the product image */}
+    <div className="card h-100"> {/* Ensures the card takes the full height available */}
       <img 
         src={imageUrl} 
         alt={product.name} 
-        className="product-image" 
+        className="card-img-top" 
+        style={{ height: '200px', objectFit: 'cover' }} // Consistent image height
       />
-
-      {/* Display product name */}
-      <h4>{product.name}</h4>
-
-      {/* Display product brand if available */}
-      <h5>{product.brand}</h5>
-
-      {/* Display product price */}
-      <p>Rs: {product.price}</p>
-
-      <p>Description: {product.description}</p>
-
-      <div className="add-cart-container">
-        {/* Button to add the product to the cart */}
-        <button type="button" className="add-cart-btn" onClick={addToCart}>
-          Add to Cart
-        </button>
-        <button type="button" className="add-cart-btn mx-2" onClick={buyNow}>
-          Buy now
-        </button>
+      <div className="card-body">
+        <h5 className="card-title">{product.name}</h5>
+        <h6 className="card-subtitle mb-2 text-muted">{product.brand}</h6>
+        <p className="card-text">Rs: {product.price}</p>
+        <p className="card-text">{product.description}</p>
+        <div className="d-flex justify-content-between">
+          <button type="button" className="btn btn-primary" onClick={addToCart}>
+            Add to Cart
+          </button>
+          <button type="button" className="btn btn-secondary" onClick={buyNow}>
+            Buy now
+          </button>
+        </div>
       </div>
-    </li>
+    </div>
   );
 };
 

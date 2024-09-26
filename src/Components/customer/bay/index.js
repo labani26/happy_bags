@@ -39,25 +39,23 @@ const Bay = () => {
         }
     };
 
-    // Add to Cart Functionality
-    const addToCart = async (productId) => {
-        const token = Cookies.get('token');  // Get JWT token from cookies
+    // Fetch Cart Items Count
+    const fetchCartCount = async () => {
         try {
-            const response = await axios.post('http://192.168.1.9:4000/customer/AddToCart', { productId }, {
+            const token = Cookies.get('token');  // Get JWT token from cookies
+            const response = await axios.get('http://192.168.1.9:4000/customer/getCustomerCart', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
             });
-            console.log("Add to Cart Response:", response.data);
-            alert("Added to Cart");
-            setCartCount(cartCount + 1);  // Increment cart count
+            setCartCount(response.data.length);  // Set cart count based on the number of items
         } catch (error) {
-            console.error("Error adding to cart", error);
+            console.log("Error fetching cart count", error);
+            setCartCount(0);  // Reset count on error
         }
     };
 
     useEffect(() => {
-        // Load products
         const loadProducts = async () => {
             const products = await fetchProducts();
             if (Array.isArray(products)) {
@@ -68,7 +66,6 @@ const Bay = () => {
             }
         };
 
-        // Load user details
         const loadUserDetails = async () => {
             const userDetails = await fetchUserDetails();
             if (userDetails) {
@@ -78,23 +75,38 @@ const Bay = () => {
 
         loadProducts();
         loadUserDetails();
+        fetchCartCount();  // Fetch cart count when the component mounts
     }, []);
+
+    const onAddClicked = async (productId) => {
+        try {
+            const token = Cookies.get('token');  // Get JWT token from cookies
+            await axios.post('http://192.168.1.9:4000/customer/AddToCart', { productId }, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            setCartCount(prevCount => prevCount + 1);  // Increment the cart count
+        } catch (error) {
+            console.log("Error adding to cart", error);
+        }
+    };
 
     return (
         <>
             <CustNav count={cartCount} userName={user?.name} />
-
-            <div className="product-selection">
-                <h2 className="deal">All Products</h2>
-                <ul className="product-row-list">
+            <div className="container mt-4"> {/* Bootstrap container */}
+                <h2 className="deal text-center mb-4">All Products</h2>
+                <div className="row"> {/* Bootstrap row */}
                     {allProductlist.map((product) => (
-                        <ProductItem
-                            product={product}
-                            key={product._id}
-                            onAddClicked={() => addToCart(product._id)}  // Call addToCart on click
-                        />
+                        <div className="col-lg-4 col-md-6 col-sm-12 mb-4" key={product._id}> {/* Adjusted column classes */}
+                            <ProductItem
+                                product={product}
+                                onAddClicked={() => onAddClicked(product._id)}  // Pass the product ID when clicked
+                            />
+                        </div>
                     ))}
-                </ul>
+                </div>
             </div>
         </>
     );

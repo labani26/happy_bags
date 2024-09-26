@@ -22,13 +22,11 @@ const CustNav = (props) => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link className="nav-link active" to="/">Home</Link>
+              <Link className="nav-link active" to="/Bay">Home</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link active" to="/About">About</Link>
-            </li>
-            <li className="nav-item">
-              <span className="nav-link active">Cart: {count}</span>
+              <Link to="/cartPage" className="nav-link active">Cart: {count}</Link>
+              {/* <div className="container"><p><Link to="/adminLogin" className="my-link-class">Admin Login</Link></p></div> */}
             </li>
           </ul>          
             <li className="nav-item">

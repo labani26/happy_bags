@@ -1,7 +1,7 @@
 import Footer from "./Components/base-comp/footer";
 import About from "./Components/base-comp/about/About";
 import SignupForm from "./Components/customer/signupForm/SignupForm";
-import Loginform from "./Components/customer/loginForm/Loginform";
+// import Loginform from "./Components/customer/loginForm/Loginform";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import "./App.css"
 import AdminLogin from "./Components/admins/adminLogin/adminLogin";
@@ -12,6 +12,7 @@ import CreateOrder from "./Components/customer/createOrder/CreateOrder";
 import Bay from "./Components/customer/bay";
 import Landing from "./Components/base-comp/landing";
 import ProtectedRoute from "./Components/Protected/ProtectedRoute";
+import CartPage from "./Components/customer/cartPage";
 
 const App = () => {
     return (
@@ -27,6 +28,7 @@ const App = () => {
           <Route exact path="/addProduct" element={< AdminAddProduct />} />
           <Route exact path="/updateUserDetails" element={<ProtectedRoute> < UpdateUserDetails /> </ProtectedRoute>} />
           <Route exact path="/createOrder" element={< CreateOrder />} />
+          <Route exact path="/cartPage" element={< CartPage />} />
         </Routes>
         {/* Footer */}
         <Footer />

@@ -40,23 +40,42 @@ const Landing = () => {
 
     }
     return (
-        <div>
-            <div className="header">
-            <Navbar count="0" />
-            <Banner />
-            </div>
-            <div className="product-selection">
-                <ul className="product-row-list">
-                    {allProductlist.map((product) => (
+        // <div>
+        //     <div className="header">
+        //     <Navbar count="0" />
+        //     <Banner />
+        //     </div>
+        //     <div className="product-selection">
+        //         <ul className="product-row-list">
+        //             {allProductlist.map((product) => (
+        //                 <ProductItem
+        //                     product={product}
+        //                     key={product._id}
+        //                     onAddClicked={onAddClicked}
+        //                 />
+        //             ))}
+        //         </ul>
+        //     </div>
+        // </div>
+        <>
+        <div className="header">
+        <Navbar count="0" />
+        <Banner />
+        </div>
+        <div className="container mt-4"> {/* Bootstrap container */}
+            <h2 className="deal text-center mb-4">All Products</h2>
+            <div className="row"> {/* Bootstrap row */}
+                {allProductlist.map((product) => (
+                    <div className="col-lg-4 col-md-6 col-sm-12 mb-4" key={product._id}> {/* Adjusted column classes */}
                         <ProductItem
                             product={product}
-                            key={product._id}
-                            onAddClicked={onAddClicked}
+                            onAddClicked={() => onAddClicked(product._id)}  // Pass the product ID when clicked
                         />
-                    ))}
-                </ul>
+                    </div>
+                ))}
             </div>
         </div>
+    </>
     )
 }
 

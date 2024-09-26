@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 // import axios from 'axios';
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 // import api from '../../../api';
 
 const UpdateUserDetails = () => {
     const [address, setAddress] = useState({ state: '', city: '', zipCode: '', land_mark: '' });
     const [message, setMessage] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -26,8 +28,9 @@ const UpdateUserDetails = () => {
                 }
             );
 
-            setMessage('Address updated successfully!');
+            setMessage('Address updated successfully!',response);
             alert(message)
+            navigate("/cartPage");
         } catch (error) {
             console.error('Error updating address:', error);
             setMessage('Failed to update address');
