@@ -1,16 +1,16 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 const CustNav = (props) => {
   const { count, userName } = props;
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const handleLogout = async (e) => {
-    e.preventDefault();
-    navigate('/');
-  };
+  // const handleLogout = async (e) => {
+  //   e.preventDefault();
+  //   navigate('/');
+  // };
 
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -26,6 +26,10 @@ const CustNav = (props) => {
             </li>
             <li className="nav-item">
               <Link to="/cartPage" className="nav-link active">Cart: {count}</Link>
+              {/* <div className="container"><p><Link to="/adminLogin" className="my-link-class">Admin Login</Link></p></div> */}
+            </li>
+            <li className="nav-item">
+              <Link to="/viewOrder" className="nav-link active">Your Orders</Link>
               {/* <div className="container"><p><Link to="/adminLogin" className="my-link-class">Admin Login</Link></p></div> */}
             </li>
           </ul>          
