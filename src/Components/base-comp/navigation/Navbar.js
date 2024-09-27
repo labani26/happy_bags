@@ -39,7 +39,9 @@ const Navbar = (props) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate(); // Initialize navigate
-
+  const handleAdminRoute = () => {
+    navigate("/adminLogin")
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -153,6 +155,7 @@ const Navbar = (props) => {
               </div>
               <div className="modal-footer">
                 <div className="submit"><button type="submit" className="btn btn-primary" data-bs-dismiss="modal">Close</button></div>
+                <div className="submit"><button type="button" onClick={handleAdminRoute} className="btn btn-primary" data-bs-dismiss="modal">I am Admin</button></div>
                 {/* <div className="container"><p><Link to="/adminLogin" className="my-link-class" data-bs-dismiss="modal">Admin Login</Link></p></div> */}
               </div>
             </div>
