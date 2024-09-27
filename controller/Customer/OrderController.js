@@ -53,7 +53,7 @@ const getCustomerOrders = async (req, res) => {
     }
 
     try {
-        const orders = await Order.find({ customerId: req.session._id });
+        const orders = await Order.find({ customerId: customerId });
         res.status(200).json(orders);
     } catch (error) {
         res.status(500).json({ message: 'Failed to retrieve orders', error });
