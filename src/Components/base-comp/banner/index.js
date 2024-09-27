@@ -19,7 +19,7 @@ const Banner = () => (
                     <p>HURRY UP!! Sale from May 26th to June 5th, 12 p.m. to 9 p.m.</p>
                 </div>
             </div>
-            <button type="button" className="btn">Explore now</button>
+            {/* <button type="button" className="btn">Explore now</button> */}
         </div>
         <img src={bag_banner} alt="Summer Sale Banner - bags at 50% off" className="banner-logo" />
     </div>

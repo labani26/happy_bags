@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import CustNav from '../CustNav';
+import { useNavigate } from "react-router-dom";
 
 const CartPage = () => {
   const [cartItems, setCartItems] = useState([]);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const navigate = useNavigate();
 
   // Fetch all cart items for the user
   const fetchCartItems = async () => {
@@ -98,11 +101,15 @@ const CartPage = () => {
   };
 
   // Handle Buy Now (redirect to a checkout page or process)
-  const handleBuyNow = (cartItemId) => {
-    // This could be a function to navigate to a checkout page or execute a purchase process
-    console.log("Buying now for cart item ID:", cartItemId);
-    // You could redirect to a checkout page or API to place an order here
-    // e.g., navigate(`/checkout/${cartItemId}`);
+  const buyNow = (productId) => {
+    // Redirect to the update user details page with the productId in the state
+    navigate('/updateUserDetails', { state: { productId } });
+  };
+
+  // Handle Place Order (redirect to a checkout page or process all items)
+  const placeOrder = () => {
+    const productIds = cartItems.map(item => item.productDetails._id);
+    navigate('/updateUserDetails', { state: { productIds } });  // Assuming you want to place all items in the order
   };
 
   return (
@@ -110,7 +117,7 @@ const CartPage = () => {
       <CustNav count={cartItems.length} userName={user?.name} />
       <div className="container">
         <h2 className="my-4">Your Cart</h2>
-        
+
         {loading ? (
           <p>Loading your cart...</p>
         ) : cartItems.length === 0 ? (
@@ -122,28 +129,28 @@ const CartPage = () => {
                 <div className="card h-100">
                   {item.productDetails ? (
                     <>
-                      <img 
-                        src={`http://192.168.1.9:4000${item.productDetails.image}`} 
-                        alt={item.productDetails.name} 
-                        className="card-img-top" 
-                        style={{ height: '200px', objectFit: 'cover' }} 
+                      <img
+                        src={`http://192.168.1.9:4000${item.productDetails.image}`}
+                        alt={item.productDetails.name}
+                        className="card-img-top"
+                        style={{ height: '200px', objectFit: 'cover' }}
                       />
                       <div className="card-body">
                         <h5 className="card-title">{item.productDetails.name}</h5>
                         <p className="card-text">{item.productDetails.description}</p>
-                        <p className="card-text">Price: ${item.productDetails.price}</p>
+                        <p className="card-text">Price: Rs:{item.productDetails.price}</p>
                         <p className="card-text">
                           Added on: {new Date(item.cartTime).toLocaleDateString()}
                         </p>
-                        <button 
-                          className="btn btn-danger mb-2" 
+                        <button
+                          className="btn btn-danger mx-3"
                           onClick={() => handleRemoveFromCart(item._id)}  // Remove cart item
                         >
                           Remove from Cart
                         </button>
-                        <button 
-                          className="btn btn-primary mb-2" 
-                          onClick={() => handleBuyNow(item._id)}  // Buy now button
+                        <button
+                          className="btn btn-secondary mx-3"
+                          onClick={() => buyNow(item.productDetails._id)}  // Buy now button
                         >
                           Buy Now
                         </button>
@@ -155,6 +162,13 @@ const CartPage = () => {
                 </div>
               </div>
             ))}
+          </div>
+        )}
+        {cartItems.length > 0 && (
+          <div className='container'>
+            <button className="btn btn-primary mx-3" onClick={placeOrder}>
+              Place Order
+            </button>
           </div>
         )}
       </div>

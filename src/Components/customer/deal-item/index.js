@@ -1,27 +1,27 @@
 import "./index.css"; // Your existing CSS for custom styles
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const ProductItem = (props) => {
   const { product, onAddClicked } = props; // Destructure props
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const addToCart = () => {
     onAddClicked(); // Trigger the parent function to handle adding the product to the cart
     console.log("Add button Clicked"); // Log for debugging
   };
 
-  const buyNow = () => {
-    navigate('/updateUserDetails', { state: product._id });
-  }
+  // const buyNow = () => {
+  //   navigate('/updateUserDetails', { state: product._id });
+  // }
 
   const imageUrl = `http://192.168.1.9:4000${product.image}`;
 
   return (
     <div className="card h-100"> {/* Ensures the card takes the full height available */}
-      <img 
-        src={imageUrl} 
-        alt={product.name} 
-        className="card-img-top" 
+      <img
+        src={imageUrl}
+        alt={product.name}
+        className="card-img-top"
         style={{ height: '200px', objectFit: 'cover' }} // Consistent image height
       />
       <div className="card-body">
@@ -33,9 +33,9 @@ const ProductItem = (props) => {
           <button type="button" className="btn btn-primary" onClick={addToCart}>
             Add to Cart
           </button>
-          <button type="button" className="btn btn-secondary" onClick={buyNow}>
+          {/* <button type="button" className="btn btn-secondary" onClick={buyNow}>
             Buy now
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

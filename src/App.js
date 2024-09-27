@@ -13,6 +13,8 @@ import Bay from "./Components/customer/bay";
 import Landing from "./Components/base-comp/landing";
 import ProtectedRoute from "./Components/Protected/ProtectedRoute";
 import CartPage from "./Components/customer/cartPage";
+import PlaceOrderPage from "./Components/customer/placeOrder/placeOrder";
+import ViewOrderPage from "./Components/customer/viewOrder/viewOrder";
 
 const App = () => {
     return (
@@ -28,7 +30,9 @@ const App = () => {
           <Route exact path="/addProduct" element={< AdminAddProduct />} />
           <Route exact path="/updateUserDetails" element={<ProtectedRoute> < UpdateUserDetails /> </ProtectedRoute>} />
           <Route exact path="/createOrder" element={< CreateOrder />} />
-          <Route exact path="/cartPage" element={< CartPage />} />
+          <Route exact path="/cartPage" element={< CartPage  />}  />
+          <Route exact path="/placeOrderPage" element={< PlaceOrderPage/>} />
+          <Route exact path="/viewOrder" element={< ViewOrderPage />} />
         </Routes>
         {/* Footer */}
         <Footer />

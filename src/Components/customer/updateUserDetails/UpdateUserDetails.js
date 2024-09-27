@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-// import axios from 'axios';
-import { useNavigate } from "react-router-dom";
-
-// import api from '../../../api';
+// import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const UpdateUserDetails = () => {
     const [address, setAddress] = useState({ state: '', city: '', zipCode: '', land_mark: '' });
     const [message, setMessage] = useState('');
+    
     const navigate = useNavigate();
-
+    const location = useLocation(); 
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -28,14 +28,36 @@ const UpdateUserDetails = () => {
                 }
             );
 
-            setMessage('Address updated successfully!',response);
-            alert(message)
-            navigate("/cartPage");
+            setMessage('Address updated successfully!', response);
+
+
+            const productId = location.state?.productId;
+
+            // Then set the timeout to navigate after showing the success message
+            setTimeout(() => {
+                console.log("Redirecting to /placeOrder");
+                navigate('/placeOrderPage', {state: { productId } }); 
+              }, 1000);
+
         } catch (error) {
             console.error('Error updating address:', error);
             setMessage('Failed to update address');
         }
     };
+
+    // Handle the navigation in a useEffect hook
+    // useEffect(() => {
+    //     if (shouldNavigate) {
+    //         setTimeout(() => {
+    //             console.log("redirect to /placeOrder")
+    //             navigate('/placeOrder');
+    //         }, 1000);  // Navigate after 1 second
+    //     }
+    // }, [shouldNavigate, navigate]);
+
+    // const buyNow = () => {
+    //     navigate('/placeOrder'); 
+    // }
 
     return (
         <div className="container mb-5">
@@ -93,9 +115,8 @@ const UpdateUserDetails = () => {
                     <button className="btn btn-primary" type="submit">Update Address</button>
                 </div>
             </form>
-            {/* <div className="grid text-center mt-3">
-                <button className="btn btn-secondary" type="button" onClick={clickToContinue}>Continue</button>
-            </div> */}
+            {/* Show success or error message */}
+             {message && <div className="alert alert-info mt-3">{message}</div>} 
         </div>
     );
 };
