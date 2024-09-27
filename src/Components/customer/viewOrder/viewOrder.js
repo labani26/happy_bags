@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import CustNav from '../CustNav';
 // import CustNav from '../CustNav';
 // import { useNavigate } from "react-router-dom";
 
@@ -100,7 +101,9 @@ const ViewOrder = () => {
 
   return (
     <>
+    
       <div className="container">
+      <CustNav />
         <h2 className="my-4">Your Orders</h2>
 
         {loading ? (

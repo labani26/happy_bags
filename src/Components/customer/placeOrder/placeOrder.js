@@ -11,7 +11,7 @@ const PlaceOrderPage = () => {
   const location = useLocation();  //allows developers to access the location object within their react app
   const navigate = useNavigate();
   const productId = location.state?.productId; // Get the productId passed from the previous page (cart)
-
+  const cartId = location.state?.cartId;
   // Redirect back to cart if no productId is passed
   useEffect(() => {
     if (!productId) {
@@ -24,6 +24,7 @@ const PlaceOrderPage = () => {
  
     setMessage('');
     console.log(productId);
+    console.log(cartId);
 
     try {
       const token = Cookies.get('token'); // Get the user's JWT token
@@ -38,6 +39,11 @@ const PlaceOrderPage = () => {
           },
         }
       );
+      await axios.delete(`http://192.168.1.9:4000/customer/removeFromCart/${cartId}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
 
       setMessage('Order placed successfully!'); 
 

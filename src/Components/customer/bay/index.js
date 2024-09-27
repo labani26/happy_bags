@@ -86,6 +86,7 @@ const Bay = () => {
                     'Authorization': `Bearer ${token}`
                 }
             });
+            alert("Item added to cart");
             setCartCount(prevCount => prevCount + 1);  // Increment the cart count
         } catch (error) {
             console.log("Error adding to cart", error);

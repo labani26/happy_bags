@@ -1,16 +1,64 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
+import axios from 'axios';
+import Cookies from 'js-cookie';
+import { useNavigate } from "react-router-dom";
 
-// import { useNavigate } from 'react-router-dom';
+const CustNav = () => {
+  const [cartItems, setCartItems] = useState([]);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-const CustNav = (props) => {
-  const { count, userName } = props;
-  // const navigate = useNavigate();
+  // Fetch the cart items from the server
+  const fetchCartItems = async () => {
+    try {
+      const token = Cookies.get('token');  // Get JWT token from cookies
+      const response = await axios.get('http://192.168.1.9:4000/customer/getCustomerCart', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching cart items", error);
+      return [];
+    }
+  };
 
-  // const handleLogout = async (e) => {
-  //   e.preventDefault();
-  //   navigate('/');
-  // };
+  // Fetch the user details (including username) from the server
+  const fetchUserDetails = async () => {
+    try {
+      const token = Cookies.get('token');  // Get JWT token from cookies
+      const response = await axios.get('http://192.168.1.9:4000/customer/profile', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching user details", error);
+      return null;
+    }
+  };
+
+  // Load cart details and user details on component mount
+  useEffect(() => {
+    const loadCartDetails = async () => {
+      setLoading(true);
+
+      const userDetails = await fetchUserDetails();
+      if (userDetails) {
+        setUser(userDetails);  // Set user details (which includes username)
+
+        const cart = await fetchCartItems();
+        setCartItems(cart);
+      }
+      
+      setLoading(false);
+    };
+
+    loadCartDetails();
+  }, []);
 
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -25,18 +73,15 @@ const CustNav = (props) => {
               <Link className="nav-link active" to="/Bay">Home</Link>
             </li>
             <li className="nav-item">
-              <Link to="/cartPage" className="nav-link active">Cart: {count}</Link>
-              {/* <div className="container"><p><Link to="/adminLogin" className="my-link-class">Admin Login</Link></p></div> */}
+              <Link to="/cartPage" className="nav-link active">Cart: {cartItems.length}</Link>
             </li>
             <li className="nav-item">
               <Link to="/viewOrder" className="nav-link active">Your Orders</Link>
-              {/* <div className="container"><p><Link to="/adminLogin" className="my-link-class">Admin Login</Link></p></div> */}
             </li>
           </ul>          
-            <li className="nav-item">
-              <h4>Welcome {userName}</h4> {/* Display userName */}
-            </li>
-          
+          <li className="nav-item">
+            <h4>Welcome {user?.name || 'Guest'}</h4> {/* Display the username or "Guest" */}
+          </li>
         </div>
       </div>
     </nav>

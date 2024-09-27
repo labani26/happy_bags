@@ -101,9 +101,12 @@ const CartPage = () => {
   };
 
   // Handle Buy Now (redirect to a checkout page or process)
-  const buyNow = (productId) => {
+  const buyNow = (productId, cartId) => {
     // Redirect to the update user details page with the productId in the state
-    navigate('/updateUserDetails', { state: { productId } });
+    navigate('/updateUserDetails', { state: { 
+      productId: productId,
+      cartId: cartId
+    } });
   };
 
   // Handle Place Order (redirect to a checkout page or process all items)
@@ -114,7 +117,7 @@ const CartPage = () => {
 
   return (
     <>
-      <CustNav count={cartItems.length} userName={user?.name} />
+      <CustNav />
       <div className="container">
         <h2 className="my-4">Your Cart</h2>
 
@@ -150,7 +153,7 @@ const CartPage = () => {
                         </button>
                         <button
                           className="btn btn-secondary mx-3"
-                          onClick={() => buyNow(item.productDetails._id)}  // Buy now button
+                          onClick={() => buyNow(item.productDetails._id, item._id)}  // Buy now button
                         >
                           Buy Now
                         </button>
@@ -166,9 +169,7 @@ const CartPage = () => {
         )}
         {cartItems.length > 0 && (
           <div className='container'>
-            <button className="btn btn-primary mx-3" onClick={placeOrder}>
-              Place Order
-            </button>
+
           </div>
         )}
       </div>
