@@ -16,7 +16,7 @@ const AdminSignup = () => {
         e.preventDefault();
 
         try {
-            const responseTo = await axios.post('http://localhost:4000/admin/signup', {
+            const responseTo = await axios.post('http://192.168.1.9:4000/admin/signup', {
                 name, email, phone, password
             });
 

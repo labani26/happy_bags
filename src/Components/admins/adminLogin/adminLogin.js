@@ -15,7 +15,7 @@ const AdminLogin = () => {
 
     try {
       // Make a POST request to the login API
-      const response = await axios.post('http://localhost:4000/admin/signin', {
+      const response = await axios.post('http://192.168.1.9:4000/admin/signin', {
         email: email,  // Correct variable name
         password: password           // Correct variable name
       });
@@ -32,6 +32,10 @@ const AdminLogin = () => {
       alert("Something went error :" ,error);
     }
   };
+
+  const handleRoueAdminSignup = () => {
+    navigate("/adminSignup")
+  }
 
   return (
     <div className='container mb-3'>
@@ -65,8 +69,13 @@ const AdminLogin = () => {
             required
           />
         </div>
-        <div className="grid text-center">
+        <div className='row'>
+        <div className="grid text-center col-md-4">
           <div className="submit"><button type="submit" className="btn btn-primary">Submit</button></div>
+        </div>
+        <div className="grid text-center col-md-4">
+          <div className="submit"><button type="button" onClick={handleRoueAdminSignup} className="btn btn-primary">Sign up</button></div>
+        </div>
         </div>
       </form>
     </div>

@@ -49,7 +49,7 @@ const UpdateUserDetails = () => {
 
             // Send POST request to update the user address with the new address entered in the form
             await axios.post(
-                'http://localhost:4000/customer/updateUserDetails',
+                'http://192.168.1.9:4000/customer/updateUserDetails',
                 { address: newAddress },
                 {
                     headers: {

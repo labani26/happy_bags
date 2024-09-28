@@ -10,7 +10,7 @@ const CreateOrder = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:4000/customer/createOrder', { productId });
+            const response = await axios.post('http://192.168.1.9:4000/customer/createOrder', { productId });
             
             console.log('Order Successful:', response);
             alert('Order placed successfully!');

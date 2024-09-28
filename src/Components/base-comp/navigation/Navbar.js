@@ -46,7 +46,7 @@ const Navbar = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:4000/customer/signin', {
+      const response = await axios.post('http://192.168.1.9:4000/customer/signin', {
         email: emailOrPhone.includes('@') ? emailOrPhone : null,
         phone: emailOrPhone.includes('@') ? null : emailOrPhone,
         password,
