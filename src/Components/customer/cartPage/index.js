@@ -15,7 +15,7 @@ const CartPage = () => {
   const fetchCartItems = async () => {
     try {
       const token = Cookies.get('token');  // Get JWT token from cookies
-      const response = await axios.get('http://192.168.1.9:4000/customer/getCustomerCart', {
+      const response = await axios.get('https://happy-bags.onrender.com/customer/getCustomerCart', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -30,7 +30,7 @@ const CartPage = () => {
   // Fetch product details for a cart item
   const fetchProductDetails = async (productId) => {
     try {
-      const response = await axios.get(`http://192.168.1.9:4000/customer/getProductDetail/${productId}`);
+      const response = await axios.get(`https://happy-bags.onrender.com/customer/getProductDetail/${productId}`);
       return response.data;
     } catch (error) {
       console.error("Error fetching product details", error);
@@ -42,7 +42,7 @@ const CartPage = () => {
   const fetchUserDetails = async () => {
     try {
       const token = Cookies.get('token');  // Get JWT token from cookies
-      const response = await axios.get('http://192.168.1.9:4000/customer/profile', {
+      const response = await axios.get('https://happy-bags.onrender.com/customer/profile', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -89,7 +89,7 @@ const CartPage = () => {
   const handleRemoveFromCart = async (cartItemId) => {
     try {
       const token = Cookies.get('token');
-      await axios.delete(`http://192.168.1.9:4000/customer/removeFromCart/${cartItemId}`, {
+      await axios.delete(`https://happy-bags.onrender.com/customer/removeFromCart/${cartItemId}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -133,7 +133,7 @@ const CartPage = () => {
                   {item.productDetails ? (
                     <>
                       <img
-                        src={`http://192.168.1.9:4000${item.productDetails.image}`}
+                        src={`https://happy-bags.onrender.com${item.productDetails.image}`}
                         alt={item.productDetails.name}
                         className="card-img-top"
                         style={{ height: '200px', objectFit: 'cover' }}

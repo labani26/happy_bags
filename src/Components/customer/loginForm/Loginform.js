@@ -15,7 +15,7 @@ const LoginForm = () => {
 
     try {
       // Make a POST request to the login API
-      const response = await axios.post('http://localhost:4000/customer/signin', {
+      const response = await axios.post('https://happy-bags.onrender.com/customer/signin', {
         email, password // Send the user's email/phone, password
 
       });

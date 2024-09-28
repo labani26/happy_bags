@@ -13,7 +13,7 @@ const CustNav = () => {
   const fetchCartItems = async () => {
     try {
       const token = Cookies.get('token');  // Get JWT token from cookies
-      const response = await axios.get('http://192.168.1.9:4000/customer/getCustomerCart', {
+      const response = await axios.get('https://happy-bags.onrender.com/customer/getCustomerCart', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -29,7 +29,7 @@ const CustNav = () => {
   const fetchUserDetails = async () => {
     try {
       const token = Cookies.get('token');  // Get JWT token from cookies
-      const response = await axios.get('http://192.168.1.9:4000/customer/profile', {
+      const response = await axios.get('https://happy-bags.onrender.com/customer/profile', {
         headers: {
           'Authorization': `Bearer ${token}`
         }

@@ -16,7 +16,7 @@ const ViewOrder = () => {
   const fetchOrderItems = async () => {
     try {
       const token = Cookies.get('token');  // Get JWT token from cookies
-      const response = await axios.get('http://192.168.1.9:4000/customer/getCustomerOrder', {
+      const response = await axios.get('https://happy-bags.onrender.com/customer/getCustomerOrder', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -31,7 +31,7 @@ const ViewOrder = () => {
   // Fetch product details for a cart item
   const fetchProductDetails = async (productId) => {
     try {
-      const response = await axios.get(`http://192.168.1.9:4000/customer/getProductDetail/${productId}`);
+      const response = await axios.get(`https://happy-bags.onrender.com/customer/getProductDetail/${productId}`);
       return response.data;
     } catch (error) {
       console.error("Error fetching product details", error);
@@ -43,7 +43,7 @@ const ViewOrder = () => {
   const fetchUserDetails = async () => {
     try {
       const token = Cookies.get('token');  // Get JWT token from cookies
-      const response = await axios.get('http://192.168.1.9:4000/customer/profile', {
+      const response = await axios.get('https://happy-bags.onrender.com/customer/profile', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -120,7 +120,7 @@ const ViewOrder = () => {
                   {item.productDetails ? (
                     <>
                       <img
-                        src={`http://192.168.1.9:4000${item.productDetails.image}`}
+                        src={`https://happy-bags.onrender.com${item.productDetails.image}`}
                         alt={item.productDetails.name}
                         className="card-img-top"
                         style={{ height: '200px', objectFit: 'cover' }}

@@ -92,9 +92,9 @@ nav{
   border: none;               /* Removes border for a cleaner look */
 }
 
-.navbar-toggler-icon {
+/* .navbar-toggler-icon {
   background-image: url("data:image/svg+xml;...");
-}
+} */
 
 /* Navbar links styling */
 .nav-link {

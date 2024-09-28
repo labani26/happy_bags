@@ -31,7 +31,7 @@ const PlaceOrderPage = () => {
 
       // Send POST request to the backend to place an order
       await axios.post(
-        'http://192.168.1.9:4000/customer/createOrder',
+        'https://happy-bags.onrender.com/customer/createOrder',
         { productId }, // Send productId in request body
         {
           headers: {
@@ -39,7 +39,7 @@ const PlaceOrderPage = () => {
           },
         }
       );
-      await axios.delete(`http://192.168.1.9:4000/customer/removeFromCart/${cartId}`, {
+      await axios.delete(`https://happy-bags.onrender.com/customer/removeFromCart/${cartId}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

@@ -10,7 +10,7 @@ const Landing = () => {
 
     const fetchProducts = async () => {  //This asynchronous function fetches product data from a backend API
         try {
-            const response = await axios.get('http://192.168.1.9:4000/customer/getAllProduct')
+            const response = await axios.get('https://happy-bags.onrender.com/customer/getAllProduct')
             console.log("API Response:", response.data)  // Ensure this is an array, or adjust based on the structure
             return response.data;
 
