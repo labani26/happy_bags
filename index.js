@@ -25,7 +25,7 @@ app.use(express.json());
 app.use('/static', express.static(path.join(__dirname, 'images')));
 
 app.use(cors({
-    origin: 'http://localhost:3000', // Replace with your actual frontend URL
+    origin: 'https://happy-bags-4.onrender.com', // Replace with your actual frontend URL
     credentials: true,
     methods: ['POST', 'PATCH', 'GET', 'OPTIONS', 'DELETE']
 }));
@@ -41,6 +41,13 @@ app.use(cors({
     }
 }));
 
+//build
+// app.use('/app', express.static(path.join(__dirname, 'public')));
+
+// app.get('/app/bags*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'public', 'index.html'));
+// });
+//build
 app.use(passport.initialize());
 app.use(passport.session());
 
