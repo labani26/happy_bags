@@ -10,7 +10,7 @@ const CreateOrder = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('https://happy-bags.onrender.com/customer/createOrder', { productId });
+            const response = await axios.post('https://happy-bags-4.onrender.com/customer/createOrder', { productId });
             
             console.log('Order Successful:', response);
             alert('Order placed successfully!');

@@ -16,7 +16,7 @@ const AdminSignup = () => {
         e.preventDefault();
 
         try {
-            const responseTo = await axios.post('https://happy-bags.onrender.com/admin/signup', {
+            const responseTo = await axios.post('https://happy-bags-4.onrender.com/admin/signup', {
                 name, email, phone, password
             });
 

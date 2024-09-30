@@ -14,7 +14,7 @@ const ProductItem = (props) => {
   //   navigate('/updateUserDetails', { state: product._id });
   // }
 
-  const imageUrl = `https://happy-bags.onrender.com${product.image}`;
+  const imageUrl = `https://happy-bags-4.onrender.com${product.image}`;
 
   return (
     <div className="card h-100"> {/* Ensures the card takes the full height available */}

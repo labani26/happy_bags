@@ -23,7 +23,7 @@ const AdminAddProduct = () => {
 
 
         try {
-            const response = await axios.post('https://happy-bags.onrender.com/admin/addProduct',{
+            const response = await axios.post('https://happy-bags-4.onrender.com/admin/addProduct',{
                 name, description, category, price, image, material, number_of_pocket, country_of_origin, count 
             });
 

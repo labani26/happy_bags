@@ -18,7 +18,7 @@ const SignupForm = () => {
 
         try {
             if(password === conPassword) {
-                await axios.post('https://happy-bags.onrender.com/customer/signup', {
+                await axios.post('https://happy-bags-4.onrender.com/customer/signup', {
                     name, email, phone, password
                 });
                 console.log('Signup Successful:');

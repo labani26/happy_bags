@@ -13,7 +13,7 @@ const Bay = () => {
     // Fetch Products
     const fetchProducts = async () => {
         try {
-            const response = await axios.get('https://happy-bags.onrender.com/customer/getAllProduct');
+            const response = await axios.get('https://happy-bags-4.onrender.com/customer/getAllProduct');
             console.log("API Response:", response.data);
             return response.data;
         } catch (error) {
@@ -26,7 +26,7 @@ const Bay = () => {
     const fetchUserDetails = async () => {
         try {
             const token = Cookies.get('token');  // Get JWT token from cookies
-            const response = await axios.get('https://happy-bags.onrender.com/customer/profile', {
+            const response = await axios.get('https://happy-bags-4.onrender.com/customer/profile', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -43,7 +43,7 @@ const Bay = () => {
     const fetchCartCount = async () => {
         try {
             const token = Cookies.get('token');  // Get JWT token from cookies
-            const response = await axios.get('https://happy-bags.onrender.com/customer/getCustomerCart', {
+            const response = await axios.get('https://happy-bags-4.onrender.com/customer/getCustomerCart', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -81,7 +81,7 @@ const Bay = () => {
     const onAddClicked = async (productId) => {
         try {
             const token = Cookies.get('token');  // Get JWT token from cookies
-            await axios.post('https://happy-bags.onrender.com/customer/AddToCart', { productId }, {
+            await axios.post('https://happy-bags-4.onrender.com/customer/AddToCart', { productId }, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

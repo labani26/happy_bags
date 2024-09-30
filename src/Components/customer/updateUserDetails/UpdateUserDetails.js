@@ -16,7 +16,7 @@ const UpdateUserDetails = () => {
     const fetchUserDetails = async () => {
         try {
             const token = Cookies.get('token');  // Get JWT token from cookies
-            const response = await axios.get('https://happy-bags.onrender.com/customer/profile', {
+            const response = await axios.get('https://happy-bags-4.onrender.com/customer/profile', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -49,7 +49,7 @@ const UpdateUserDetails = () => {
 
             // Send POST request to update the user address with the new address entered in the form
             await axios.post(
-                'https://happy-bags.onrender.com/customer/updateUserDetails',
+                'https://happy-bags-4.onrender.com/customer/updateUserDetails',
                 { address: newAddress },
                 {
                     headers: {
