@@ -25,7 +25,7 @@ app.use(express.json());
 app.use('/static', express.static(path.join(__dirname, 'images')));
 
 app.use(cors({
-    origin: ['https://eloquent-cocada-495f93.netlify.app', 'http://localhost:3000'], // Replace with your actual frontend URL
+    origin: '*', // Replace with your actual frontend URL
     credentials: true,
     methods: ['POST', 'PATCH', 'GET', 'OPTIONS', 'DELETE']
 }));
