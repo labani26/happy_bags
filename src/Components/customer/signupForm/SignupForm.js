@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 
 const SignupForm = () => {
-
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
@@ -17,22 +16,31 @@ const SignupForm = () => {
         e.preventDefault();
 
         try {
-            if(password === conPassword) {
-                await axios.post('https://happy-bags-4.onrender.com/customer/signup', {
+            if (password === conPassword) {
+                const response = await axios.post('https://happy-bags-4.onrender.com/customer/signup', {
                     name, email, phone, password
                 });
-                console.log('Signup Successful:');
+
+                console.log('Signup Successful:', response);
                 alert('Signup successful!');
-    
-                navigate('/')
-            }
-            else {
+                navigate('/');
+            } else {
                 alert("Password mismatch!!!");
             }
         } catch (error) {
             console.error('Signup Error:', error);
-            alert(error);
-            console.log(error.response.data)
+
+            // Check if the error response status is 400 (Bad Request)
+            if (error.response && error.response.status === 400) {
+                // Check for specific message from the server
+                if (error.response.data && error.response.data.message === 'User already exists') {
+                    alert('User already exists. Please use a different email or phone.');
+                } else {
+                    alert('An error occurred during signup. Please check your input and try again.');
+                }
+            } else {
+                alert('An unexpected error occurred. Please try again later.');
+            }
         }
     };
 
@@ -84,6 +92,7 @@ const SignupForm = () => {
                         required
                     />
                 </div>
+
                 <div className="mb-3">
                     <label htmlFor="password" className="form-label">Password</label>
                     <input
@@ -98,6 +107,7 @@ const SignupForm = () => {
                         required
                     />
                 </div>
+
                 <div className="mb-3">
                     <label htmlFor="conpassword" className="form-label">Confirm Password</label>
                     <input
@@ -111,13 +121,17 @@ const SignupForm = () => {
                         required
                     />
                 </div>
+
                 <div className="grid text-center">
                     <div className="submit"><button type="submit" className="btn btn-primary">Submit</button></div>
                 </div>
             </form>
-          <div className="container"><p><Link to="/adminSignup" className="my-link-class">Admin Signup</Link></p></div>
+
+            <div className="container">
+                <p><Link to="/adminSignup" className="my-link-class">Admin Signup</Link></p>
+            </div>
         </div>
     )
-}
+};
 
 export default SignupForm;
