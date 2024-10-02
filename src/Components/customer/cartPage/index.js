@@ -127,7 +127,7 @@ const CartPage = () => {
           <p>Your cart is empty.</p>
         ) : (
           <div className="row">
-            {cartItems.map((item, index) => (
+            {cartItems.map((item) => (
               <div className="col-md-4 mb-4" key={item._id}>
                 <div className="card h-100">
                   {item.productDetails ? (
@@ -169,7 +169,9 @@ const CartPage = () => {
         )}
         {cartItems.length > 0 && (
           <div className='container'>
-
+             <button className="btn btn-primary" onClick={placeOrder}>
+              Place Order
+            </button>
           </div>
         )}
       </div>
