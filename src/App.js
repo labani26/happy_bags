@@ -15,7 +15,7 @@ import ProtectedRoute from "./Components/Protected/ProtectedRoute";
 import CartPage from "./Components/customer/cartPage";
 import PlaceOrderPage from "./Components/customer/placeOrder/placeOrder";
 import ViewOrderPage from "./Components/customer/viewOrder/viewOrder";
-
+import Logout from "./Components/customer/logout/logout";
 const App = () => {
     return (
       <Router>
@@ -33,6 +33,7 @@ const App = () => {
           <Route exact path="/cartPage" element={< CartPage  />}  />
           <Route exact path="/placeOrderPage" element={< PlaceOrderPage/>} />
           <Route exact path="/viewOrder" element={< ViewOrderPage />} />
+          <Route exact path="/Logout" element={< Logout />} />
         </Routes>
         {/* Footer */}
         <Footer />

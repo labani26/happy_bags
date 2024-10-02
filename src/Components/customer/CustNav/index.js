@@ -78,6 +78,9 @@ const CustNav = () => {
             <li className="nav-item">
               <Link to="/viewOrder" className="nav-link active">Your Orders</Link>
             </li>
+            <li className="nav-item">
+              <Link to="/Logoutr" className="nav-link active">Logout</Link>
+            </li>
           </ul>          
           <li className="nav-item">
             <h4>Welcome {user?.name || 'Guest'}</h4> {/* Display the username or "Guest" */}
