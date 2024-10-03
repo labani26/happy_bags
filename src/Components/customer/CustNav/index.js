@@ -81,7 +81,7 @@ const CustNav = () => {
               <Link to="/viewOrder" className="nav-link active">Your Orders</Link>
             </li>
             <li className="nav-item">
-              <Link to="/Logoutr" className="nav-link active">Logout</Link>
+              <Link to="/Logout" className="nav-link active">Logout</Link>
             </li>
           </ul>          
           <li className="nav-item">
