@@ -9,6 +9,8 @@ const CustNav = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const navigate = useNavigate();
+
   // Fetch the cart items from the server
   const fetchCartItems = async () => {
     try {

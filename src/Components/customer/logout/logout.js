@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const logout = () => {
     const navigate = useNavigate();
@@ -19,6 +20,7 @@ const logout = () => {
 
         }catch (error) {
             console.error("Logout failed", error);
+            alert('Failed to log out, please try again.');
         }
     };
 
