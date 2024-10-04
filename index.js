@@ -74,7 +74,7 @@ app.get("/", (req, res) => {
 
 MongoConnect(); // Ensure MongoConnect is correctly setting up your database connection
 
-app.use("/user", LogoutRoutes);
+app.use("/customer", LogoutRoutes);
 app.use("/admin", AdminRoutes); 
 app.use("/admin", ProductRoutes);
 app.use("/admin", FetchAllOrderRoutes);
