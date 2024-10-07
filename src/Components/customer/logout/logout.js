@@ -19,7 +19,11 @@ const Logout = () => {
       }
       // Make API call to the logout route with Authorization header
 <<<<<<< HEAD
+<<<<<<< HEAD
       const response = await axios.get('https://happy-bags-4.onrender.com/customer/logoutWebsite', {
+=======
+      const response = await axios.get('https://happy-bags-4.onrender.com/customer/logout', {
+>>>>>>> e7d8f7a348c0e08fc839512aa25fd2968a527612
 =======
       const response = await axios.get('https://happy-bags-4.onrender.com/customer/logout', {
 >>>>>>> e7d8f7a348c0e08fc839512aa25fd2968a527612
