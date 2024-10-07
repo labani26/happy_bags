@@ -1,6 +1,10 @@
 const express = require('express');
 const { AddToCart, getCustomerCarts, removeFromCart } = require("../../controller/Customer/AddToCartController");
+<<<<<<< HEAD
 const {isAuthenticated} = require('../../middleware/isAuthenticated'); // Use your existing JWT auth middleware
+=======
+const isAuthenticated = require('../../middleware/isAuthenticated'); // Use your existing JWT auth middleware
+>>>>>>> c5fb60db2ba48f1b2b157bbd0f21b39a1c6b4696
 
 const router = express.Router();
 

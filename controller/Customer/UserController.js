@@ -3,7 +3,10 @@ const Customer = require('../../models/Customer/UserSchema');
 const jwt = require('jsonwebtoken');
 
 const SECRET_KEY = "HAPPY_BAGS";  // Store in environment variables in production
+<<<<<<< HEAD
 const blacklist = new Set();
+=======
+>>>>>>> c5fb60db2ba48f1b2b157bbd0f21b39a1c6b4696
 
 // Register new user
 const signup = async (req, res) => {
@@ -93,6 +96,7 @@ const signin = async (req, res) => {
     }
 };
 
+<<<<<<< HEAD
 const logout = (req, res) => {
     const token = req.headers.authorization?.split(' ')[1];
 
@@ -106,3 +110,6 @@ const logout = (req, res) => {
 
 // Exporting the controller methods
 module.exports = { signup, signin, logout, blacklist };
+=======
+module.exports = { signup, signin };
+>>>>>>> c5fb60db2ba48f1b2b157bbd0f21b39a1c6b4696
