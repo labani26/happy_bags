@@ -55,7 +55,7 @@ const CustNav = () => {
         const cart = await fetchCartItems();
         setCartItems(cart);
       }
-      
+
       setLoading(false);
     };
 
@@ -81,9 +81,12 @@ const CustNav = () => {
               <Link to="/viewOrder" className="nav-link active">Your Orders</Link>
             </li>
             <li className="nav-item">
-              <Link to="/Logout" className="nav-link active">Logout</Link>
+              {/* <Link to="/Logout" className="nav-link active">Logout</Link> */}
+              <div className="container mt-4">
+                <button className="btn btn-primary" onClick={handleLogout}>Logout</button>
+              </div>
             </li>
-          </ul>          
+          </ul>
           <li className="nav-item">
             <h4>Welcome {user?.name || 'Guest'}</h4> {/* Display the username or "Guest" */}
           </li>

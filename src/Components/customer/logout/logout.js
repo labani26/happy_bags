@@ -44,11 +44,11 @@ const Logout = () => {
     }
   };
 
-  return (
-    <div className="container mt-4">
-      <button className="btn btn-primary" onClick={handleLogout}>Logout</button>
-    </div>
-  )
+  // return (
+  //   <div className="container mt-4">
+  //     <button className="btn btn-primary" onClick={handleLogout}>Logout</button>
+  //   </div>
+  // )
 }
 
 export default Logout;
