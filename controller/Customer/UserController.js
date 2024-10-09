@@ -95,7 +95,7 @@ const signin = async (req, res) => {
 
 const logout = (req, res) => {
     const token = req.headers.authorization?.split(' ')[1];
-
+    console.log(token)
     if (token) {
         blacklist.add(token); // Add the token to the blacklist
         return res.status(200).json({ message: "Logout successful. Token has been blacklisted." });
