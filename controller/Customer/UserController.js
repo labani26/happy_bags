@@ -100,7 +100,7 @@ const logout = (req, res) => {
         blacklist.add(token); // Add the token to the blacklist
         return res.status(200).json({ message: "Logout successful. Token has been blacklisted." });
     } else {
-        return res.status(400).json({ message: "No token provided" });
+        return res.status(400).json({ message: "No token provide" });
     }
 };
 
