@@ -7,7 +7,7 @@ const updateUserDetails = async (req, res) => {
     const token = req.headers.authorization?.split(" ")[1]; // Assuming 'Bearer TOKEN'
 
     if (!token) {
-        return res.status(401).json({ error: "No token provided, please log in" });
+        return res.status(401).json({ error: "No token found, please log in" });
     }
 
     try {
